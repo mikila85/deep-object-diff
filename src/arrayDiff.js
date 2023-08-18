@@ -18,25 +18,26 @@ const diff = (lhs, rhs) => {
   }
 
   if (Array.isArray(r) && Array.isArray(l)) {
-    const deletedValues = l.reduce((acc, item, index) => {
-      return hasOwnProperty(r, index) ? acc.concat(item) : acc.concat(undefined);
-    }, []);
+    return l;
+    // const deletedValues = l.reduce((acc, item, index) => {
+    //   return hasOwnProperty(r, index) ? acc.concat(item) : acc.concat(undefined);
+    // }, []);
 
-    return r.reduce((acc, rightItem, index) => {
-      if (!hasOwnProperty(deletedValues, index)) {
-        return acc.concat(rightItem);
-      }
+    // return r.reduce((acc, rightItem, index) => {
+    //   if (!hasOwnProperty(deletedValues, index)) {
+    //     return acc.concat(rightItem);
+    //   }
 
-      const leftItem = l[index];
-      const difference = diff(rightItem, leftItem);
+    //   const leftItem = l[index];
+    //   const difference = diff(rightItem, leftItem);
 
-      if (isObject(difference) && isEmpty(difference) && !isDate(difference)) {
-        delete acc[index];
-        return acc; // return no diff
-      }
+    //   if (isObject(difference) && isEmpty(difference) && !isDate(difference)) {
+    //     delete acc[index];
+    //     return acc; // return no diff
+    //   }
 
-      return acc.slice(0, index).concat(rightItem).concat(acc.slice(index + 1)); // return updated key
-    }, deletedValues);
+    //   return acc.slice(0, index).concat(rightItem).concat(acc.slice(index + 1)); // return updated key
+    // }, deletedValues);
   }
 
   return Object.keys(r).reduce((acc, key) => {
